@@ -1,22 +1,33 @@
-<p align="center">
-  <small>Join the project community on our server!</small>
-  <br/><br/>
-  <a href="https://discord.gg/https://discord.gg/btZpkp45gQ" target="_blank" title="Join our community!">
-    <img src="https://dcbadge.limes.pink/api/server/https://discord.gg/btZpkp45gQ"/>
-  </a>
-</p>
-<hr/>
+# Pwnagotchi
 
 <p align="center">
-    <a href="https://github.com/evilsocket/pwnagotchi/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/evilsocket/pwnagotchi.svg?style=flat-square"></a>
+    <a href="https://github.com/aluminum-ice/pwnagotchi/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/aluminum-ice/pwnagotchi.svg?style=flat-square"></a>
     <a href="https://github.com/evilsocket/pwnagotchi/blob/master/LICENSE.md"><img alt="Software License" src="https://img.shields.io/badge/license-GPL3-brightgreen.svg?style=flat-square"></a>
-    <a href="https://github.com/evilsocket/pwnagotchi/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/evilsocket/pwnagotchi"/></a>
+    <a href="https://github.com/evilsocket/aluminum-ice/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/aluminum-ice/pwnagotchi"/></a>
     <a href="https://twitter.com/intent/follow?screen_name=pwnagotchi"><img src="https://img.shields.io/twitter/follow/pwnagotchi?style=social&logo=twitter" alt="follow on Twitter"></a>
-    <br/>
-    <br/>
-    <img src="https://www.evilsocket.net/images/human-coded.png" height="30px" alt="This project is 100% made by humans."/>
-
 </p>
+
+This is a fork of the [original pwnagotchi project](https://github.com/evilsocket/pwnagotchi). I have heavily updated my fork to enable pwnagotchi to run well on a Raspberry Pi Zero 2 W. Major changes include:
+
+1. **Remove all dependency on Kali-Pi** (causes more problems than it fixes) :boom: :boom:
+2. Update to [Old Stable Bullseye-32 Lite 2024-03-12](https://downloads.raspberrypi.org/raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2024-03-12/)
+3. Compile [nexmon from source](https://github.com/seemoo-lab/nexmon)
+    * Raspberry Pi Zero 2W (RPiZ2W) supported via firmware patch bcm43436b0/9_88_4_65 (43430/2) and bcm43430a1/7_45_41_46 (43430/1)
+    * Raspberry Pi 3B+ (RPi3B+) and Pi 4 (RPi4) supported via firmware patch bcm43455c0/7_45_206/
+4. Update to [Go v1.22.4](https://go.dev/dl/)
+5. Compile [BetterCap from source](https://github.com/bettercap/bettercap)
+6. Install screenrc and [my preferred configuration for it](https://github.com/aluminum-ice/screenrc)
+7. Install aircrack-ng
+8. Install pwnagotchi plugin for the Waveshare UPS hat, Mastodon, and aircrack (to delete empty pcap files); need to manually add configuration to config.toml
+9. Turn off power saving mode for the wifi chip to prevent BRCM firmware crashes during packet injection (e.g., deauth attack)
+
+If you'd like to support my work, contributions can be sent to my BTC wallet: 1CdEWNasdBbu4mB8QgfhFnWwKjHJVJaWZF
+
+![50653A40-45F3-4D92-A89E-5FCBD20F60CC_4_5005_c](https://github.com/aluminum-ice/pwnagotchi/assets/12374267/04761c6e-f6a7-40b1-803f-6ee6e6bf2278)
+
+**This fork does not support the original RPiZW. The board is obsolete and underpowered. Issues about the original RPiZW will be immediately closed.**
+
+---
 
 [Pwnagotchi](https://pwnagotchi.ai/) is an [A2C](https://hackernoon.com/intuitive-rl-intro-to-advantage-actor-critic-a2c-4ff545978752)-based "AI" leveraging [bettercap](https://www.bettercap.org/) that learns from its surrounding WiFi environment to maximize the crackable WPA key material it captures (either passively, or by performing authentication and association attacks). This material is collected as PCAP files containing any form of handshake supported by [hashcat](https://hashcat.net/hashcat/), including [PMKIDs](https://www.evilsocket.net/2019/02/13/Pwning-WiFi-networks-with-bettercap-and-the-PMKID-client-less-attack/), 
 full and half WPA handshakes.
